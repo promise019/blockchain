@@ -34,11 +34,12 @@ wss.on("connection", (ws) => {
         mine(ws, data);
         break;
       case "start":
+        const lastHash = block.length > 0 ? block[block.length - 1].hash : "00";
         ws.send(
           JSON.stringify({
             type: "mine",
             // nonce: block.length,
-            prevHash: block[block.length]?.hash || "00",
+            prevHash: lastHash,
           })
         );
         break;
